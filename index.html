@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+        }
+
+        .caja-contenedor {
+            position: relative;
+            border: 3px solid #717171;
+            padding: 10px;
+            width: 18em;
+        }
+
+        .titulo-caja {
+            position: absolute;
+            background-color: white;
+            top: -11px;
+            left: 10px;
+            padding: 0 5px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul li {
+            margin: 10px 0;
+        }
+        .caja2 {
+            text-align: left; 
+            margin-top: 20px; 
+            margin-left: -1em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Seleccionar Muchos</h1>
+    <div class="caja-contenedor">
+        <div class="titulo-caja"><b>Selecciona las tortas</b></div>
+        <ul>
+            <li>
+                <label>
+                    <input type="checkbox" id="hawaiana" value="100.00"> Hawaiana $100.00
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" id="espanola" value="120.00"> Española $120.00
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" id="cubana" value="80.00"> Cubana $80.00
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" id="italiana" value="110.00"> Italiana $110.00
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" id="mexicana" value="95.00"> Mexicana $95.00
+                </label>
+            </li>
+        </ul>
+    </div>
+  
+    <div class="caja2">
+        <p><b>Seleccionaste:</b> <span id="seleccion"></span></p>
+        <p><b>Costo:</b> $<span id="total">0.00</span></p>
+        <p>Copyright 2023 Angel Hernandez Martinez</p>
+    </div>
+    
+    <script>
+         function capitalizarPrimeraLetra(palabra) {
+            return palabra.charAt(0).toUpperCase() + palabra.slice(1);
+          }
+
+        function actualizarSeleccion() {
+                    const seleccion = [];
+                    let total = 0;
+                    const opciones = document.querySelectorAll('input[type="checkbox"]:checked');
+                    
+                    opciones.forEach((opcion) => {
+                        const opcionTexto = capitalizarPrimeraLetra(opcion.id);
+                        seleccion.push(opcionTexto);
+                        total += parseFloat(opcion.value);
+                    });
+                
+                    document.getElementById('seleccion').textContent = seleccion.join(', ');
+                    document.getElementById('total').textContent = total.toFixed(2);
+                }
+                
+                const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+                checkboxes.forEach((checkbox) => {
+                    checkbox.addEventListener('change', actualizarSeleccion);
+                });
+                
+                actualizarSeleccion();
+
+    </script>
+</body>
+</html>
